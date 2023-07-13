@@ -1,0 +1,58 @@
+#静态资源访问路径 （默认规则）
+#spring.mvc.static-path-pattern=/static/**
+#spring.mvc.resources.static-locations=/,
+#classpath:/META-INF/resources/,
+#classpath:/resources/,classpath:/static/,
+#classpath:/public/,classpath:/ewbapp/static/
+
+
+spring:
+  jackson:
+    date-format:  yyyy--MM-dd HH:mm:ss
+  jdbc:
+    template:
+      query-timeout: 3
+  datasource:
+    url: jdbc:mysql://localhost:3306/demo
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      aop-patterns: com.atguigu.admin.*  #springbean监控
+      filters: stat,wall,slf4j  #所有开启的功能
+      stat-view-servlet:  #监控页配置
+        enabled: true
+        login-username: admin
+        login-password: admin
+        resetEnable: false
+
+      web-stat-filter:  #web监控
+        enabled: true
+        urlPattern: /*
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+#  redis:
+#    host: lxl12345.redis.rds.aliyuncs.com
+#    port: 6379
+#    password: lxl000:lxl00000S
+
+#    client-type: jedis
+#    jedis:
+#      pool:
+#        max-active: 10
+#  配置 devtools
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署
+      additional-paths: src/main/java #重启目录
+      exclude: WEB-INF/**  #排除文件(不重启项目)
+    freemarker:
+      cache: false    #页面不加载缓存，修改即时生效
+  #写入thymeleaf属性
+  thymeleaf:
+    # 模板的模式
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    # 这个开发配置为false，避免改了模板还要重启服务器
+    cache: false
